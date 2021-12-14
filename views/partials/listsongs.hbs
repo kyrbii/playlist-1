@@ -6,17 +6,11 @@
     </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Happy</td>
-            <td>Pharrell Williams</td>
-        </tr>
-        <tr>
-            <td>Get Lucky</td>
-            <td>Daft Punk</td>
-        </tr>
-        <tr>
-            <td>Don’t Worry, Be Happy</td>
-            <td>Bobby McFerrin</td>
-        </tr>
+        {{#each songs}}
+            <tr>
+                <td>{{title}}</td>
+                <td>{{artist}}</td>
+            </tr>
+        {{/each}}
     </tbody>
 </table>

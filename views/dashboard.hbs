@@ -2,6 +2,8 @@
 <h3>Dashboard</h3>
 
 <div class="border p-2 my-2">
-    <h4>Happy songs</h4>
-    {{> listsongs}}
+    {{#each playlists}}
+        <h4>{{title}}</h4>
+        {{> listsongs}}
+    {{/each}}
 </div>
