@@ -3,7 +3,9 @@
 
 <div class="border p-2 my-2">
     {{#each playlists}}
-        <h4>{{title}}</h4>
-        {{> listsongs}}
+        <div class="border p-2 my-2">
+            <h4>{{title}}</h4>
+            {{> listsongs}}
+        </div>
     {{/each}}
 </div>
