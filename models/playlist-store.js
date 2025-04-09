@@ -1,41 +1,27 @@
-const logger = require("../utils/logger.js");
+const dataStore = require("./data-store.js"); 
+const dataStoreClient = dataStore.getDataStore(); 
+const logger = require("../utils/logger.js"); 
 
-const happySongs = {
-  title: "Happy songs",
-  songs: [
-    {
-      title: "Happy",
-      artist: "Pharrell Williams",
-    },
-    {
-      title: "Get Lucky",
-      artist: "Daft Punk",
-    },
-    {
-      title: "Don’t Worry, Be Happy",
-      artist: "Bobby McFerrin",
-    },
-  ],
-};
+const playlistStore = { 
+  async getPlaylists(id) { 
+    const query = 'SELECT * FROM playlist2_playlists WHERE id=$1';
+    const values = [id];
+    try { 
+      let result = await dataStoreClient.query(query, values); 
+      return result.rows[0]; 
+    } catch (e) { 
+      logger.error("Error fetching all playlists", e); 
+    } 
+  },
+  async getAllPlaylists(id) { 
+    const query = 'SELECT * FROM playlist2_playlists';
+    try { 
+      let result = await dataStoreClient.query(query); 
+      return result.rows; 
+    } catch (e) { 
+      logger.error("Error fetching all playlists", e); 
+    } 
+  }
+}; 
 
-const iconicSongs = {
-  title: "Iconic songs",
-  songs: [
-    {
-      title: "Smells Like Teen Spirit",
-      artist: "Nirvana",
-    },
-    {
-      title: "Bohemian Rhapsody",
-      artist: "Queen",
-    },
-    {
-      title: "Imagine",
-      artist: "John lennon",
-    },
-  ],
-};
-
-const playlistCollection = [happySongs, iconicSongs];
-
-module.exports = playlistCollection;
+module.exports = playlistStore; 

@@ -1,14 +1,16 @@
 const logger = require("../utils/logger.js");
-const playListCollection = require("../models/playlist-store.js");
+// const playListCollection = require("../models/playlist-store.js");
+const playlistStore = require("../models/playlist-store.js");
 
 const dashboard = {
-  index(request, response) {
+  async index(request, response) {
     logger.info("dashboard rendering");
+    const playLists = await playlistStore.getAllPlaylists();
     const viewData = {
       title: "Dashboard",
-      playlists: playListCollection
+      playlists: playLists
     };
-    logger.info('about to render', playListCollection);
+    logger.info('about to render', playLists);
     response.render("dashboard", viewData);
   }
 };
