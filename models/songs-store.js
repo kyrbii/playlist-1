@@ -13,6 +13,16 @@ const songStore = {
       logger.error("Error fetching songs for playlist" ,e);
     }
   },
+  async removeSong(songId) { 
+    const query = 'DELETE FROM playlist2_songs WHERE id=$1'; 
+    const values = [songId]; 
+    try { 
+        await dataStoreClient.query(query, values); 
+    } catch (e) { 
+        logger.error("Unable to remove song from playlist", e); 
+    }; 
+  }, 
+
 };
 
 module.exports = songStore;

@@ -14,7 +14,14 @@ const playlist = {
             songs: songs
         }; 
         response.render('playlist', viewData); 
-    }, 
+    },
+    async deleteSong(request, response) { 
+        const playlistId = request.params.playlistID; 
+        const songId = request.params.songID; 
+        logger.debug(`Deleting Song ${songId} from Playlist ${playlistId}`); 
+        await songStore.removeSong(songId); 
+        response.redirect("/playlist/" + playlistId); 
+    },
 }; 
  
 module.exports = playlist; 
